@@ -18,6 +18,7 @@ parser code
 {:
 	public Lexer lexer;
 	public java.io.PrintWriter fileWriter;
+	public boolean errorLexer = false;
 
 	public Parser(Lexer lexer, java.io.PrintWriter fileWriter)
 	{
@@ -29,7 +30,7 @@ parser code
 	public void report_error(String message, Object info)
 	{
 		// Debug output to terminal
-		System.out.print("ERROR >> ");
+		System.out.print("ERROR >> ");		
 		System.out.print("[");
 		System.out.print(lexer.getLine());
 		System.out.print(":");
@@ -37,10 +38,19 @@ parser code
 		System.out.print("] ");
 		System.out.println();
 		
-		// Output to file
-		fileWriter.print("ERROR(");
-		fileWriter.print(lexer.getLine());
-		fileWriter.print(")");
+		// Check if lexical error or syntax error
+		if (errorLexer)
+		{
+			// Lexical error - output just "ERROR"
+			fileWriter.print("ERROR");
+		}
+		else
+		{
+			// Syntax error - output "ERROR(line)"
+			fileWriter.print("ERROR(");
+			fileWriter.print(lexer.getLine());
+			fileWriter.print(")");
+		}
 		fileWriter.close();
 		System.exit(0);
 	}
@@ -52,10 +62,21 @@ parser code
 scan with
 {:
 	Symbol s = lexer.next_token();
-	System.out.print("[" + lexer.getLine() + ":" + lexer.getTokenStartPosition() + "] ");
+	errorLexer = (s.sym == TokenNames.ERROR);
+	System.out.print(s.sym);
+	System.out.print("[");
+	System.out.print(lexer.getLine());
+	System.out.print(":");
+	System.out.print(lexer.getTokenStartPosition());
+	System.out.print("] ");
 	System.out.print(TokenNames.terminalNames[s.sym]);
-	if (s.value != null) System.out.print("( " + s.value + " )");
-	System.out.println();
+	if (s.value != null)
+	{
+		System.out.print("( ");
+		System.out.print(s.value);
+		System.out.print(" )");
+	}
+	System.out.print("\n");
 	return s; 
 :};
 
