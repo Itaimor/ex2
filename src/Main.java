@@ -2,6 +2,7 @@ import java.io.*;
 import java.io.PrintWriter;
 import java_cup.runtime.Symbol;
 import ast.*;
+import ast.Stmt.AstStmtList;
 
 public class Main
 {
