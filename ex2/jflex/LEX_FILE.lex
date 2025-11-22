@@ -122,7 +122,7 @@ import java_cup.runtime.*;
 			{
 				return symbol(TokenNames.ERROR);
 			}
-			return symbol(TokenNames.INT, text);
+			return symbol(TokenNames.INT, num);
 		} catch (NumberFormatException e) {
 			// Number is too large or invalid format
 			return symbol(TokenNames.ERROR);
