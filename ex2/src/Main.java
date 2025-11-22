@@ -1,5 +1,5 @@
 import java.io.*;
-import java.io.PrintWriter;
+
 import java_cup.runtime.Symbol;
 import ast.*;
 import ast.Stmt.AstStmtList;
@@ -28,6 +28,7 @@ public class Main
 			/* [2] Initialize a file writer */
 			/********************************/
 			fileWriter = new PrintWriter(outputFileName);
+			System.setOut(new PrintStream(new FileOutputStream(outputFileName)));
 			
 			/******************************/
 			/* [3] Initialize a new lexer */
@@ -66,5 +67,3 @@ public class Main
 		}
 	}
 }
-
-

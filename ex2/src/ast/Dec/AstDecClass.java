@@ -33,9 +33,19 @@ public class AstDecClass extends AstDec
 	public void printMe()
 	{
 		if (parentName == null)
-			System.out.format("AST NODE CLASS( %s )\n", name);
-		else
-			System.out.format("AST NODE CLASS( %s ) EXTENDS( %s )\n", name, parentName);
+			{
+				AstGraphviz.getInstance().logNode(
+					serialNumber,
+					String.format("CLASS\n(%s)", name)
+				);
+			}
+			else
+			{
+				AstGraphviz.getInstance().logNode(
+					serialNumber,
+					String.format("CLASS\n(%s)\nEXTENDS(%s)", name, parentName)
+				);
+			}
 
 		if (fields != null) fields.printMe();
 

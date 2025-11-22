@@ -39,7 +39,10 @@ public class AstProgram extends AstNode
 		System.out.print("AST NODE PROGRAM\n");
 
 		if (head != null) head.printMe();
-		if (next != null) next.printMe();
+		if (next != null)
+			System.out.print("====================== program -> dec program\n");
+		else
+			System.out.print("====================== program -> dec\n");
 
 		AstGraphviz.getInstance().logNode(
 				serialNumber,
