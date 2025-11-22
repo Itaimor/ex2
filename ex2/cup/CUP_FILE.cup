@@ -17,21 +17,31 @@ import ast.Func.*;
 parser code 
 {:
 	public Lexer lexer;
+	public java.io.PrintWriter fileWriter;
 
-	public Parser(Lexer lexer)
+	public Parser(Lexer lexer, java.io.PrintWriter fileWriter)
 	{
 		super(lexer);
 		this.lexer = lexer;
+		this.fileWriter = fileWriter;
 	}
 
 	public void report_error(String message, Object info)
 	{
-		System.out.print("ERROR >> ");		
+		// Debug output to terminal
+		System.out.print("ERROR >> ");
 		System.out.print("[");
 		System.out.print(lexer.getLine());
 		System.out.print(":");
 		System.out.print(lexer.getTokenStartPosition());
 		System.out.print("] ");
+		System.out.println();
+		
+		// Output to file
+		fileWriter.print("ERROR(");
+		fileWriter.print(lexer.getLine());
+		fileWriter.print(")");
+		fileWriter.close();
 		System.exit(0);
 	}
 :}
