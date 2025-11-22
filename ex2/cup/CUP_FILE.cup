@@ -210,9 +210,19 @@ var ::= ID:name                          {: RESULT = new AstVarSimple(name); :}
 /************/
 /* CALL EXPR*/
 /************/
-callExp ::= var:v DOT ID:name LPAREN RPAREN
+callExp ::= 
+          /* Standalone function call - no object prefix */
+          ID:name LPAREN RPAREN
+            {: RESULT = new AstExpCall(null,name,null); :}
+          
+        | ID:name LPAREN expList:l RPAREN
+            {: RESULT = new AstExpCall(null,name,l); :}
+          
+          /* Method call on object */
+        | var:v DOT ID:name LPAREN RPAREN
             {: RESULT = new AstExpCall(v,name,null); :}
-          | var:v DOT ID:name LPAREN expList:l RPAREN
+          
+        | var:v DOT ID:name LPAREN expList:l RPAREN
             {: RESULT = new AstExpCall(v,name,l); :}
           ;
 
