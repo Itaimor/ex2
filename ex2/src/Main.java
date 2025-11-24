@@ -28,8 +28,7 @@ public class Main
 			/* [2] Initialize a file writer */
 			/********************************/
 			fileWriter = new PrintWriter(outputFileName);
-			System.setOut(new PrintStream(new FileOutputStream(outputFileName)));
-			
+
 			/******************************/
 			/* [3] Initialize a new lexer */
 			/******************************/
@@ -53,7 +52,7 @@ public class Main
 			/*************************/
 			/* [7] Write OK to file */
 			/*************************/
-			fileWriter.print("OK\n");
+			fileWriter.print("OK");
 			fileWriter.close();
 			
 			/*************************************/

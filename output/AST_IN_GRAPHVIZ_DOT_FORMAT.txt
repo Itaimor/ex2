@@ -1,0 +1,12 @@
+digraph
+{
+graph [ordering = "out"]
+v0 [label = "PRIMITIVE
+(int)"];
+v1 [label = "ARRAY_TYPEDEF
+(IntArray)"];
+v1 -> v0;
+v132 [label = "PROGRAM"];
+v132 -> v1;
+v132 -> v131;
+}
