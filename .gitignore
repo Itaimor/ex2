@@ -4,3 +4,4 @@ src/Lexer.java
 PARSER
 .vscode/
 bin/
+self_check_output/
