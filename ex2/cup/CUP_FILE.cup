@@ -278,7 +278,7 @@ exp ::= INT:i                              {: RESULT = new AstExpInt(i); :}
       | exp:e1 LT exp:e2                   {: RESULT = new AstExpBinop(e1,e2,4); :}
       | exp:e1 GT exp:e2                   {: RESULT = new AstExpBinop(e1,e2,5); :}
       | exp:e1 EQ exp:e2                   {: RESULT = new AstExpBinop(e1,e2,6); :}
-      | MINUS exp:e                        {: RESULT = new AstExpUnaryMinus(e); :}
+      | MINUS INT:i                        {: RESULT = new AstExpUnaryMinus(new AstExpInt(i)); :}
       | LPAREN exp:e RPAREN                {: RESULT = new AstExpParen(e); :}
       | callExp:c                          {: RESULT = c; :}
       | NEW type:t                         {: RESULT = new AstExpNewType(t); :}
@@ -329,3 +329,4 @@ stmt ::=
 stmtList ::= stmt:s stmtList:l    {: RESULT = new AstStmtList(s,l); :}
            | stmt:s               {: RESULT = new AstStmtList(s,null); :}
            ;
+
